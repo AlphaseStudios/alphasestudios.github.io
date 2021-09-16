@@ -14,7 +14,7 @@
         <span class="text-gray-600 mx-4 select-none" v-show="i !== items.length - 1">|</span>
       </span>
     </div>
-<!--    <div class="flex-shrink"></div> Right side-->
+    <div class="flex-shrink"></div> Right side
   </div>
 </template>
 
