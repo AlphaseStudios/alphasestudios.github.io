@@ -42,6 +42,7 @@ import MenuIcon from 'vue-material-design-icons/Menu.vue';
 import CloseIcon from 'vue-material-design-icons/Close.vue';
 import { RawLocation } from 'vue-router';
 import Modal from '@/components/Modal.vue';
+import debounce from '@/utils';
 
 @Component({
   components: {
@@ -77,20 +78,9 @@ export default class NavBar extends Vue {
 
     this.showItems = window.innerWidth < minSize;
 
-    window.addEventListener('resize', this.debounce(() => {
-      console.log('resize');
+    window.addEventListener('resize', debounce(() => {
       this.showItems = window.innerWidth < minSize;
     }, 300));
-  }
-
-  private debounce (func: () => void, time: number): (e: unknown) => void {
-    const actualTime = time || 100;
-    let timer: number | null;
-
-    return (e) => {
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(func, actualTime, e);
-    };
   }
 
   private navigateTo (rawLocation: RawLocation): void {

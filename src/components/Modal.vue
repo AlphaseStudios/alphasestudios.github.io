@@ -5,7 +5,8 @@
     ref="modal"
   >
     <div
-      class="relative top-20 mx-auto p-2 border w-96 shadow-lg rounded-md bg-white anim"
+      class="relative top-20 mx-auto p-2 border shadow-lg rounded-md bg-white anim"
+      :class="smallerWidth ? 'w-80': 'w-96'"
     >
       <slot/>
     </div>
@@ -19,6 +20,7 @@ import {
   VModel,
   Vue, Watch,
 } from 'vue-property-decorator';
+import debounce from '@/utils';
 
 @Component
 export default class Modal extends Vue {
@@ -32,9 +34,17 @@ export default class Modal extends Vue {
     type: Boolean,
   }) private persistent!: boolean;
 
+  private smallerWidth = false;
   private actualOpen = false;
 
   mounted (): void {
+    const minSize = 850;
+
+    this.smallerWidth = window.innerWidth < minSize;
+    window.addEventListener('resize', debounce(() => {
+      this.smallerWidth = window.innerWidth < minSize;
+    }, 300));
+
     this.actualOpen = this.open;
 
     const modal = (this.$refs.modal as HTMLDivElement);
