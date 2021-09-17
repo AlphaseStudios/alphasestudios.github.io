@@ -75,10 +75,10 @@ export default class NavBar extends Vue {
   mounted (): void {
     const minSize = 750;
 
-    this.showItems = window.screen.width < minSize;
+    this.showItems = window.innerWidth < minSize;
 
-    window.addEventListener('resize', () => {
-      this.showItems = window.screen.width < minSize;
+    window.addEventListener('', () => {
+      this.showItems = window.innerWidth < minSize;
     });
   }
 
