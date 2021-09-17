@@ -77,7 +77,7 @@ export default class NavBar extends Vue {
 
     this.showItems = window.innerWidth < minSize;
 
-    window.addEventListener('', () => {
+    window.addEventListener('resize', () => {
       this.showItems = window.innerWidth < minSize;
     });
   }
