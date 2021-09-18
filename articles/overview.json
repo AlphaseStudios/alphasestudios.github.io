@@ -1,0 +1,11 @@
+{
+  "articles": [
+    {
+      "id": "test",
+      "name": "Alphabots end of service",
+      "description": "We are going to shut down Alphabot soon.",
+      "author": "JustMe",
+      "date": "17/9/21"
+    }
+  ]
+}
