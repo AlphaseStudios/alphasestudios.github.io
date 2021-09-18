@@ -26,6 +26,11 @@ const routes: Array<RouteConfig> = [
     props: true,
     component: () => import(/* webpackChunkName: "Blog detail" */ '../views/blog/Detail.vue'),
   },
+  {
+    path: '*',
+    name: 'not found',
+    component: () => import(/* webpackChunkName: "Not found" */ '@/views/NotFound.vue'),
+  },
 ];
 
 const router = new VueRouter({
