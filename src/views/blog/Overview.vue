@@ -1,20 +1,22 @@
 <template>
-  <div class="max-w-4xl m-auto my-3">
-    <span class="text-gray-700 font-bold text-3xl">Our articles</span>
-    <hr/>
+  <div class="mx-2">
+    <div class="max-w-4xl m-auto my-3">
+      <span class="text-gray-700 font-bold text-3xl">Our articles</span>
+      <hr/>
 
-    <div class="overflow-x-auto max-h-full">
-      <div v-for="(article, i) in articles" :key="i"
-           class="border border-gray-300 rounded-lg p-2 mt-3 flex flex-row justify-between hover:border-blue-500 hover:border hover:bg-blue-100 cursor-pointer"
-           @click="$router.push(`/blog/${article.id}`)"
-      >
-        <div class="flex flex-col">
-          <div class="text-xl font-semibold">{{ article.name }}</div>
-          <div class="text-gray-600">{{ article.description }}</div>
-        </div>
-        <div class="flex flex-col text-gray-600">
-          <div class="text-right">{{ article.author }}</div>
-          <div>{{ article.date }}</div>
+      <div class="overflow-x-auto max-h-full">
+        <div v-for="(article, i) in articles" :key="i"
+             class="border border-gray-300 rounded-lg p-2 mt-3 flex flex-row justify-between hover:border-blue-500 hover:border hover:bg-blue-100 cursor-pointer"
+             @click="$router.push(`/blog/${article.id}`)"
+        >
+          <div class="flex flex-col">
+            <div class="text-xl font-semibold">{{ article.name }}</div>
+            <div class="text-gray-600 h-6 w-full overflow-ellipsis overflow-hidden">{{ article.description }}</div>
+          </div>
+          <div class="flex flex-col text-gray-600">
+            <div class="text-right">{{ article.author }}</div>
+            <div>{{ article.date }}</div>
+          </div>
         </div>
       </div>
     </div>
