@@ -1,10 +1,18 @@
 <template>
   <div class="mx-2">
     <div class="max-w-4xl m-auto border border-gray-300 rounded-lg my-3">
-      <div v-if="!article" class="text-center my-6 text-lg text-gray-700">
+      <div v-if="loadingArticle"
+           class="flex justify-center items-center text-center my-6 text-lg text-gray-700">
+        <div class="flex items-center flex-col">
+          Loading article...
+          <loading-icon class="svg-loading ring-4 ring-gray-300 ring-inset rounded-full"></loading-icon>
+        </div>
+      </div>
+
+      <div v-else-if="!article" class="text-center my-6 text-lg text-gray-700">
         <span class="text-xl">Sorry :(</span>
         <br/>
-        This article is not in the correct format.
+        This article is not in the correct format or doesn't exist.
         <div class="btn-dark m-auto text-base mt-6 w-56" @click="$router.push('/blog')">Go back
         </div>
       </div>
@@ -35,6 +43,7 @@ import axios from 'axios';
 import hljs from 'highlight.js';
 import Showdown from 'showdown';
 import DOMPurify from 'dompurify';
+import LoadingIcon from 'vue-material-design-icons/Loading.vue';
 import { Article } from '@/interfaces';
 
 Showdown.extension('codehighlight', () => {
@@ -97,18 +106,34 @@ Showdown.extension('tailwind', () => [
 
 Showdown.setFlavor('github');
 
-@Component
+@Component({
+  components: {
+    LoadingIcon,
+  },
+})
 export default class Detail extends Vue {
   @Prop() private blogId: string | undefined;
   // private md = '';
   private baseBlogURI = '/articles';
   private converter = new Showdown.Converter({ extensions: ['codehighlight', 'tailwind'] });
   private article: Article | null = null;
+  private loadingArticle = true;
 
   async mounted (): Promise<void> {
     this.converter.setFlavor('github');
 
-    const res = await axios.get(`${this.baseBlogURI}/${this.blogId}/data.json`);
+    let res;
+    try {
+      res = await axios.get(`${this.baseBlogURI}/${this.blogId}/data.json`);
+    } catch (e) {
+      if (e.response.status !== 200) {
+        console.log(`Server returned a ${e.response.status}`);
+        this.loadingArticle = false;
+      }
+      return;
+    }
+    this.loadingArticle = false;
+
     const data = res.data as Article;
 
     if (!data.name || !data.date || !data.description || !data.author) {
@@ -170,5 +195,9 @@ export default class Detail extends Vue {
   margin: 4px 0 4px;
   padding: 10px;
   border-radius: 5px;
+}
+
+.svg-loading > svg {
+  @apply animate-spin;
 }
 </style>
