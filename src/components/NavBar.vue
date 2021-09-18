@@ -65,10 +65,6 @@ export default class NavBar extends Vue {
       name: 'About us',
       to: '/about',
     },
-    {
-      name: 'History',
-      to: '/history',
-    },
   ];
   private menuOpen = false;
   private showItems = false;
