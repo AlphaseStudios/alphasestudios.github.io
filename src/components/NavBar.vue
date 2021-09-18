@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="poppins h-14 bg-gray-800 flex flex-row
+    <div class="font-poppins h-14 bg-gray-800 flex flex-row
   items-center justify-between text-gray-200 px-3 shadow-lg">
       <div class="flex-grow">
         <router-link
@@ -88,9 +88,3 @@ export default class NavBar extends Vue {
   }
 }
 </script>
-
-<style scoped>
-.poppins {
-  font-family: Poppins, sans-serif;
-}
-</style>
