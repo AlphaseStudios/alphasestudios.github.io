@@ -86,10 +86,4 @@ export default class Home extends Vue {
 .tborder {
   @apply border border-black py-1 px-2;
 }
-
-hr {
-  border-width: 0.135rem;
-  margin: 2px 0 2px;
-  max-width: 80%;
-}
 </style>

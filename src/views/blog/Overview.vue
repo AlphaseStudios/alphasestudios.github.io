@@ -41,11 +41,3 @@ export default class Overview extends Vue {
   }
 }
 </script>
-
-<style scoped>
-hr {
-  border-width: 0.135rem;
-  margin: 2px 0 2px;
-  max-width: 80%;
-}
-</style>
